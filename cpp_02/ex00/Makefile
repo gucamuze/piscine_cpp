@@ -1,10 +1,10 @@
-NAME = harlFilter
+NAME = zombieHorde
 
 CC = c++
 
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
 
-SRC = main.cpp Harl.class.cpp
+SRC = main.cpp Zombie.class.cpp zombieHorde.cpp
 
 OBJ = ${SRC:.cpp=.o}
 
@@ -26,7 +26,6 @@ clean :
 fclean : clean
 	rm -f $(NAME)
 
-re : fclean
-	make all
+re : fclean all
 
 .PHONY : all clean fclean re .cpp.o

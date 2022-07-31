@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.class.hpp                                   :+:      :+:    :+:   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/20 15:32:13 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/07/31 16:12:59 by gucamuze         ###   ########.fr       */
+/*   Created: 2022/07/31 14:20:29 by gucamuze          #+#    #+#             */
+/*   Updated: 2022/07/31 15:40:33 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANA_CLASS_HPP
-#define HUMANA_CLASS_HPP
+#ifndef CLAPTRAP_HPP
+#define CLAPTRAP_HPP
 
-#include <iomanip>
 #include <iostream>
-#include "Weapon.class.hpp"
 
-class HumanA {
+class Claptrap {
 	private:
-		Weapon			&_weapon;
 		std::string		_name;
+		unsigned int	_hp;
+		unsigned int	_ep;
+		unsigned int	_ad;
 		
 	public:
-					HumanA( std::string name, Weapon &weapon );
-		void		attack( void );
+		Claptrap( void );
+		Claptrap( std::string name );
+		Claptrap( const Claptrap &claptrap );
+		~Claptrap( void );
+		
+		Claptrap &operator=( const Claptrap &claptrap );
+		
+		void		attack( const std::string& target );
+		void		takeDamage( unsigned int amount );
+		void		beRepaired( unsigned int amount );
 };
 
 #endif

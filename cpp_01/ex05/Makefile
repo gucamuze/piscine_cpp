@@ -26,6 +26,7 @@ clean :
 fclean : clean
 	rm -f $(NAME)
 
-re : fclean all
+re : fclean 
+	make all
 
 .PHONY : all clean fclean re .cpp.o
