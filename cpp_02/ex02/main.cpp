@@ -31,7 +31,7 @@ int main(void)
 	std::cout << "j / i = " << j / i << std::endl;
 	std::cout << "j * i = " << j * i << std::endl;
 
-	std::cout << "\nMAIN TEST:" << std::endl;
+	std::cout << "\nTESTS FROM SUBJECT:" << std::endl;
 	Fixed a;
 	Fixed const b(Fixed(5.05f) * Fixed(2));
 	std::cout << a << std::endl;
