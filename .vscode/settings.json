@@ -1,5 +1,18 @@
 {
 	"files.associations": {
-		"iostream": "cpp"
+		"iostream": "cpp",
+		"optional": "cpp",
+		"istream": "cpp",
+		"ostream": "cpp",
+		"system_error": "cpp",
+		"array": "cpp",
+		"functional": "cpp",
+		"tuple": "cpp",
+		"type_traits": "cpp",
+		"utility": "cpp",
+		"random": "cpp",
+		"limits": "cpp",
+		"ranges": "cpp",
+		"algorithm": "cpp"
 	}
 }
