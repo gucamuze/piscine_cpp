@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 01:31:44 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/08/05 02:04:05 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/08/05 14:13:36 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 Intern::Intern()
 {
 	this->_func_array[0] = this->createPPForm;
-	this->_func_array[1] = this->createRRForm;
-	this->_func_array[2] = this->createSCForm;
+	this->_func_array[1] = this->createSCForm;
+	this->_func_array[2] = this->createRRForm;
 }
 
 Intern::Intern( const Intern & src )
@@ -77,9 +77,9 @@ Form	*Intern::createRRForm(std::string target)
 Form	*Intern::makeForm(std::string formName, std::string formTarget) const
 {
 	std::string	available_forms[3] = {
-		"robotomy request",
+		"presidential pardon",
 		"shruberry creation",
-		"presidential pardon"
+		"robotomy request"
 	};
 	
 	size_t i;

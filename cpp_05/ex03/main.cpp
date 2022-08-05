@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 00:47:07 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/08/05 02:06:45 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/08/05 14:15:10 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int main(void)
 		boss.signForm(*rrf);
 		boss.executeForm(*rrf);
 		delete rrf;
+		rrf = someRandomIntern.makeForm("sleep request", "gucamuze");
 	}
 	catch(const std::exception& e)
 	{
