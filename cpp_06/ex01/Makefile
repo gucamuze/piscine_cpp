@@ -1,10 +1,10 @@
-NAME = Convert
+NAME = Serialized
 
 CC = c++
 
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
 
-SRC = main.cpp Converter.cpp
+SRC = main.cpp
 
 OBJ = ${SRC:.cpp=.o}
 

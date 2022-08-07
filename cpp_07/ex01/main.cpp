@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 17:40:43 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/08/06 17:43:04 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/08/07 05:57:08 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(void)
 {
-    std::string array[3] = {"coucou", "toi", "bye"};
+    std::string array[3] = {"plz", "no", "blackhole"};
     char str[6] = "Hello";
 
     iter<std::string>(array, 3, print_elem);

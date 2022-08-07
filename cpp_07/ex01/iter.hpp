@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/07 05:57:25 by gucamuze          #+#    #+#             */
+/*   Updated: 2022/08/07 05:57:26 by gucamuze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ITER_HPP
 #define ITER_HPP
 
@@ -10,9 +22,9 @@ void    print_elem(const T &elem)
 }
 
 template<typename T>
-void    iter(const T* addr_array, int len, void funct(const T & elem)) {
+void    iter(const T* array, int len, void func(const T & elem)) {
     for (int i = 0; i < len; i++)
-        funct(addr_array[i]);
+        func(array[i]);
 }
 
 #endif

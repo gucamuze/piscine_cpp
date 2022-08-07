@@ -1,45 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Data.cpp                                           :+:      :+:    :+:   */
+/*   Converter.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 15:53:00 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/08/07 04:44:57 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/08/07 04:54:09 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Data.hpp"
+#include "Converter.hpp"
 
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-Data::Data() : _user_input("")
+Converter::Converter() : _user_input("")
 {
-	throw Data::InvalidInputException();
+	throw Converter::InvalidInputException();
 }
-Data::Data(std::string user_input) : _user_input(user_input)
+Converter::Converter(std::string user_input) : _user_input(user_input)
 {
 	this->_convert_functions[0] = this->_convertToChar;
 	this->_convert_functions[1] = this->_convertToInt;
 	this->_convert_functions[2] = this->_convertToFloat;
 	this->_convert_functions[3] = this->_convertToDouble;
 }
-Data::Data( const Data & src ) : _user_input(src._user_input) {}
+Converter::Converter( const Converter & src ) : _user_input(src._user_input) {}
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
 */
 
-Data::~Data() {}
+Converter::~Converter() {}
 
 /*
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-Data &				Data::operator=( Data const & rhs )
+Converter &				Converter::operator=( Converter const & rhs )
 {
 	(void)rhs;
 	return *this;
@@ -49,7 +49,7 @@ Data &				Data::operator=( Data const & rhs )
 ** --------------------------------- METHODS ----------------------------------
 */
 
-unsigned int	Data::_detectType(void)
+unsigned int	Converter::_detectType(void)
 {
 	std::string s = this->getUserInput();
 	// Check easy identifiable stuff
@@ -76,17 +76,20 @@ unsigned int	Data::_detectType(void)
 		{
 			if (i == 0)
 				sign_flag++;
-			else throw Data::InvalidInputException();
+			else throw Converter::InvalidInputException();
 		}
 		else if (c == 'f' || c == 'F')
+		{
+			if (i != s.length() - 1) throw Converter::InvalidInputException();
 			f_flag++;
+		}
 		else if (c == '.')
 			dot_flag++;
 		else if (!std::isdigit(c))
-			throw Data::InvalidInputException();
+			throw Converter::InvalidInputException();
 	}
 	if (f_flag > 1 || dot_flag > 1)
-		throw Data::InvalidInputException();
+		throw Converter::InvalidInputException();
 	if (f_flag)
 		return FLOAT;
 	else if (dot_flag)
@@ -95,7 +98,7 @@ unsigned int	Data::_detectType(void)
 		return INT;
 }
 
-void	Data::_convertToChar(std::string str, unsigned int mask)
+void	Converter::_convertToChar(std::string str, unsigned int mask)
 {
 	char c = str.at(0);
 	
@@ -108,7 +111,7 @@ void	Data::_convertToChar(std::string str, unsigned int mask)
 		<< static_cast<double>(c) << std::endl;
 }
 
-void	Data::_convertToInt(std::string str, unsigned int mask)
+void	Converter::_convertToInt(std::string str, unsigned int mask)
 {
 	double i = std::strtod(str.c_str(), NULL);
 	
@@ -137,10 +140,10 @@ void	Data::_convertToInt(std::string str, unsigned int mask)
 				  << static_cast<double>(i) << std::endl;
 }
 
-void	Data::_convertToFloat(std::string str, unsigned int mask)
+void	Converter::_convertToFloat(std::string str, unsigned int mask)
 {
 	float f = std::strtod(str.c_str(), NULL);
-	int p = str.length() - str.find_first_of('.') - 2;
+	int p = (str.find_first_of('.') == str.npos) ? 0 : str.length() - str.find_first_of('.') - 2;
 	
 	if (isnan(f) || mask & CHAR_OVERFLOW)
 		std::cout << "char: Impossible" << std::endl;
@@ -167,10 +170,10 @@ void	Data::_convertToFloat(std::string str, unsigned int mask)
 				  << static_cast<double>(f) << std::endl;
 }
 
-void	Data::_convertToDouble(std::string str, unsigned int mask)
+void	Converter::_convertToDouble(std::string str, unsigned int mask)
 {
 	double d = std::strtod(str.c_str(), NULL);
-	int p = str.length() - str.find_first_of('.') - 1;
+	int p = (str.find_first_of('.') == str.npos) ? 0 : str.length() - str.find_first_of('.') - 2;
 
 	if (isnan(d) || mask & CHAR_OVERFLOW)
 		std::cout << "char: Impossible" << std::endl;
@@ -197,7 +200,7 @@ void	Data::_convertToDouble(std::string str, unsigned int mask)
 				  << static_cast<double>(d) << std::endl;
 }
 
-void	Data::parseAndDisplay(void)
+void	Converter::parseAndDisplay(void)
 {
 	// Parse and detect type
 	unsigned int	type = this->_detectType();
@@ -209,7 +212,7 @@ void	Data::parseAndDisplay(void)
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
-std::string const &Data::getUserInput() const
+std::string const &Converter::getUserInput() const
 {
 	return this->_user_input;
 }
@@ -218,15 +221,15 @@ std::string const &Data::getUserInput() const
 ** --------------------------------- EXCEPTIONS -------------------------------
 */
 
-const char *Data::CharConversionException::what() const throw()
+const char *Converter::CharConversionException::what() const throw()
 {
 	return "Character not displayable";
 }
-const char *Data::OverflowException::what() const throw()
+const char *Converter::OverflowException::what() const throw()
 {
 	return "Number overflow";
 }
-const char *Data::InvalidInputException::what() const throw()
+const char *Converter::InvalidInputException::what() const throw()
 {
 	return "Invalid input";
 }
@@ -240,19 +243,14 @@ unsigned int	getOverflowMask(std::string str)
 	unsigned int				mask = 0;
 	
 	ss >> ld;
-	std::cout << "long double: " << ld << std::endl;
 	if (ld > CHAR_MAX || ld < CHAR_MIN)
 		mask |= CHAR_OVERFLOW;
-	std::cout << "mask: " << mask << std::endl;
 	if (ld > INT_MAX || ld < INT_MIN)
 		mask |= INT_OVERFLOW;
-	std::cout << "mask: " << mask << std::endl;
 	if (ld > FLT_MAX || ld < -FLT_MAX)
 		mask |= FLOAT_OVERFLOW;
-	std::cout << "mask: " << mask << std::endl;
 	if (ld > DBL_MAX || ld < -DBL_MAX)
 		mask |= DOUBLE_OVERFLOW;
-	std::cout << "mask: " << mask << std::endl;
 
 	return mask;
 }

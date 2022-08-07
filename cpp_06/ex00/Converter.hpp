@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Data.hpp                                           :+:      :+:    :+:   */
+/*   Converter.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 15:20:07 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/08/07 04:01:02 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/08/07 04:54:15 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_HPP
-#define DATA_HPP
+#ifndef CONVERTER_HPP
+#define CONVERTER_HPP
 
 #include <iomanip>
 #include <iostream>
@@ -31,7 +31,7 @@ enum	convert_type {CHAR, INT, FLOAT, DOUBLE};
 #define FLOAT_OVERFLOW 4 // 0100
 #define DOUBLE_OVERFLOW 8 // 1000
 
-class Data
+class Converter
 {
 	private:
 		const std::string	_user_input;
@@ -46,12 +46,12 @@ class Data
 		static void			_convertToDouble(std::string str, unsigned int mask);
 
 	public:
-		Data();
-		Data(std::string user_input);
-		Data(Data const &src);
-		~Data();
+		Converter();
+		Converter(std::string user_input);
+		Converter(Converter const &src);
+		~Converter();
 
-		Data &operator=(Data const &rhs);
+		Converter &operator=(Converter const &rhs);
 
 		std::string const &getUserInput() const;
 
@@ -71,7 +71,7 @@ class Data
 		};
 };
 
-std::ostream	&operator<<(std::ostream &o, Data const &i);
+std::ostream	&operator<<(std::ostream &o, Converter const &i);
 unsigned int	getOverflowMask(std::string str);
 
 #endif

@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 15:19:36 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/08/07 04:54:23 by gucamuze         ###   ########.fr       */
+/*   Created: 2022/08/07 05:11:48 by gucamuze          #+#    #+#             */
+/*   Updated: 2022/08/07 05:56:15 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Converter.hpp"
+#ifndef BASE_HPP
+#define BASE_HPP
 
-int main(int ac, char **av)
+class Base
 {
-	if (ac == 2)
-	{
-		Converter	converter(av[1]);
-		try {
-			converter.parseAndDisplay();
-		} catch (std::exception &e) {
-			std::cerr << "Error: " << e.what() << std::endl;
-		}
-	}
-	else
-		std::cout << "Invalid number of arguments, expected 1, got "
-			<< ac - 1 << " instead\n";
-	return 0;
-}
+	public:
+		virtual ~Base();
+};
+
+#endiffunct
+funct
