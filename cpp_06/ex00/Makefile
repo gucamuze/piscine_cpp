@@ -1,8 +1,8 @@
 NAME = Convert
 
-CC = c++
+CXX = c++
 
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -MMD
 
 SRC = main.cpp Converter.cpp
 
@@ -10,15 +10,12 @@ OBJ = ${SRC:.cpp=.o}
 
 DEP = ${OBJ:.o=.d}
 
-.cpp.o:
-	$(CC) $(CPPFLAGS) -c $< -o $@
-
 all : $(NAME)
 
 -include $(DEP)
 
 $(NAME) : $(OBJ)
-	$(CC) $(CPPFLAGS) -o $(NAME) $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
 
 clean :
 	rm -f $(OBJ) $(DEP)

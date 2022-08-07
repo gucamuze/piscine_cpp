@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 15:53:00 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/08/07 04:54:09 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/08/07 21:16:20 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ void	Converter::_convertToInt(std::string str, unsigned int mask)
 	
 	if (mask & CHAR_OVERFLOW)
 		std::cout << "char: Impossible" << std::endl;
-	else if (std::isprint(static_cast<unsigned char>(i)))
-		std::cout << "char: '" << static_cast<char>(i) << "'" << std::endl;
+	else if (i > 0 && std::isprint(static_cast<unsigned char>(i)))
+		std::cout << "char: " << static_cast<char>(i) << std::endl;
 	else
 		std::cout << "char: Not displayable" << std::endl;
 
@@ -148,11 +148,11 @@ void	Converter::_convertToFloat(std::string str, unsigned int mask)
 	if (isnan(f) || mask & CHAR_OVERFLOW)
 		std::cout << "char: Impossible" << std::endl;
 	else if (std::isprint(static_cast<unsigned char>(f)))
-		std::cout << "char: '" << static_cast<char>(f) << "'" << std::endl;
+		std::cout << "char: " << static_cast<char>(f) << std::endl;
 	else
 		std::cout << "char: Not displayable" << std::endl;
 
-	if (isnan(f) || mask & INT_OVERFLOW)
+	if (isnan(f) || isinf(f) || mask & INT_OVERFLOW)
 		std::cout << "int: Impossible" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(f) << std::endl;
@@ -173,12 +173,12 @@ void	Converter::_convertToFloat(std::string str, unsigned int mask)
 void	Converter::_convertToDouble(std::string str, unsigned int mask)
 {
 	double d = std::strtod(str.c_str(), NULL);
-	int p = (str.find_first_of('.') == str.npos) ? 0 : str.length() - str.find_first_of('.') - 2;
+	int p = (str.find_first_of('.') == str.npos) ? 0 : str.length() - str.find_first_of('.') - 1;
 
 	if (isnan(d) || mask & CHAR_OVERFLOW)
 		std::cout << "char: Impossible" << std::endl;
 	else if (std::isprint(static_cast<unsigned char>(d)))
-		std::cout << "char: '" << static_cast<char>(d) << "'" << std::endl;
+		std::cout << "char: " << static_cast<char>(d) << std::endl;
 	else
 		std::cout << "char: Not displayable" << std::endl;
 
@@ -221,14 +221,6 @@ std::string const &Converter::getUserInput() const
 ** --------------------------------- EXCEPTIONS -------------------------------
 */
 
-const char *Converter::CharConversionException::what() const throw()
-{
-	return "Character not displayable";
-}
-const char *Converter::OverflowException::what() const throw()
-{
-	return "Number overflow";
-}
 const char *Converter::InvalidInputException::what() const throw()
 {
 	return "Invalid input";
@@ -236,6 +228,7 @@ const char *Converter::InvalidInputException::what() const throw()
 
 /* ************************************************************************** */
 
+// :( looked great but sadly floats and doubles dont overflow
 unsigned int	getOverflowMask(std::string str)
 {
 	std::stringstream	ss(str);
@@ -247,10 +240,10 @@ unsigned int	getOverflowMask(std::string str)
 		mask |= CHAR_OVERFLOW;
 	if (ld > INT_MAX || ld < INT_MIN)
 		mask |= INT_OVERFLOW;
-	if (ld > FLT_MAX || ld < -FLT_MAX)
-		mask |= FLOAT_OVERFLOW;
-	if (ld > DBL_MAX || ld < -DBL_MAX)
-		mask |= DOUBLE_OVERFLOW;
+	// if (ld > FLT_MAX || ld < -FLT_MAX)
+	// 	mask |= FLOAT_OVERFLOW;
+	// if (ld > DBL_MAX || ld < -DBL_MAX)
+	// 	mask |= DOUBLE_OVERFLOW;
 
 	return mask;
 }

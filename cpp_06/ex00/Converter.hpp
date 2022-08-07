@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 15:20:07 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/08/07 04:54:15 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/08/07 21:16:26 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,6 @@ class Converter
 
 		void	parseAndDisplay(void);
 		
-		class CharConversionException : public std::exception
-		{
-			virtual const char *what() const throw();
-		};
-		class OverflowException : public std::exception
-		{
-			virtual const char *what() const throw();
-		};
 		class InvalidInputException : public std::exception
 		{
 			virtual const char *what() const throw();
