@@ -6,7 +6,7 @@
 /*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 05:57:25 by gucamuze          #+#    #+#             */
-/*   Updated: 2022/08/07 05:57:26 by gucamuze         ###   ########.fr       */
+/*   Updated: 2022/08/07 06:00:56 by gucamuze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@
 #include <iostream>
 
 template<typename T>
-void    print_elem(const T &elem)
-{
-    std::cout << "elem = " << elem << std::endl;
-}
+void    display(const T &elem) { std::cout << ">" << elem << std::endl; }
 
 template<typename T>
 void    iter(const T* array, int len, void func(const T & elem)) {

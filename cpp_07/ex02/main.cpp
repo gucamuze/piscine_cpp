@@ -1,54 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gucamuze <gucamuze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/07 06:13:41 by gucamuze          #+#    #+#             */
+/*   Updated: 2022/08/07 06:15:03 by gucamuze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 #include "Array.hpp"
-#include <stdlib.h>     /* srand, rand */
-#define MAX_VAL 750
+#include <stdlib.h>
+#define SIZE 750
 
-int main(int, char**)
+int main(void)
 {
-    Array<int> numbers(MAX_VAL);
-    int* mirror = new int[MAX_VAL];
+    Array<int>	template_array(SIZE);
+    int			*int_array = new int[SIZE];
     srand(time(NULL));
-    for (int i = 0; i < MAX_VAL; i++)
+    for (int i = 0; i < SIZE; i++)
     {
         const int value = rand();
-        numbers[i] = value;
-        mirror[i] = value;
+        template_array[i] = value;
+        int_array[i] = value;
     }
-    //SCOPE
     {
-        Array<int> tmp = numbers;
+        Array<int> tmp = template_array;
         Array<int> test(tmp);
     }
 
-    for (int i = 0; i < MAX_VAL; i++)
+    for (int i = 0; i < SIZE; i++)
     {
-        if (mirror[i] != numbers[i])
-        {
+        if (int_array[i] != template_array[i]) {
             std::cerr << "didn't save the same value!!" << std::endl;
             return 1;
-        }
+        } 
+		else {
+			std::cout << "template_array["<< i <<"] => " << template_array[i]
+				<< "\tint_array["<< i <<"] => " << int_array[i] << std::endl;
+		}
     }
-    try
-    {
-        numbers[-2] = 0;
+    try {	// Check underflow
+        template_array[-2] = 0;
+	} catch(const std::exception& e) {
+        std::cerr << "underflow catched ! " << e.what() << '\n';
     }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
+    try {	// Check overflow
+        template_array[SIZE] = 0;
+    } catch(const std::exception& e) {
+        std::cerr << "overflow catched ! " << e.what() << '\n';
     }
-    try
-    {
-        numbers[MAX_VAL] = 0;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        numbers[i] = rand();
-    }
-    delete [] mirror;//
+    delete [] int_array;//
     return 0;
 }
